@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Weather App</title>
+  <style>
+    body {
+      background: linear-gradient(to bottom, #89f7fe, #66a6ff);
+      font-family: Arial, sans-serif;
+      text-align: center;
+      color: #333;
+    }
+    .weather-box {
+      background: rgba(255, 255, 255, 0.8);
+      border-radius: 15px;
+      display: inline-block;
+      padding: 20px;
+      margin-top: 50px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    }
+    input {
+      padding: 8px;
+      border-radius: 8px;
+      border: none;
+      width: 200px;
+    }
+    button {
+      padding: 8px 12px;
+      border: none;
+      border-radius: 8px;
+      background-color: #007BFF;
+      color: white;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <h1>🌦️ Weather Forecast</h1>
+  <form method="POST">
+    <input type="text" name="city" placeholder="Enter city name" required>
+    <button type="submit">Check Weather</button>
+  </form>
+
+  {% if weather %}
+    <div class="weather-box">
+      {% if weather.error %}
+        <h3>{{ weather.error }}</h3>
+      {% else %}
+        <h2>{{ weather.city }}</h2>
+        <img src="http://openweathermap.org/img/wn/{{ weather.icon }}@2x.png" alt="Weather icon">
+       <p>🌡️ Temperature: {{ weather.temperature_c }} °C / {{ weather.temperature_f }} °F</p>
+        <p>💧 Humidity: {{ weather.humidity }}%</p>
+        <p>🌬️ Wind Speed: {{ weather.wind }} m/s</p>
+        <p>☁️ Description: {{ weather.description }}</p>
+
+      {% endif %}
+    </div>
+  {% endif %}
+</body>
+</html>
